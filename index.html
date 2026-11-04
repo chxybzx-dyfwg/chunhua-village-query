@@ -116,13 +116,14 @@
   .table-scroll::-webkit-scrollbar{height:8px;}
   .table-scroll::-webkit-scrollbar-thumb{background:#C9C4B6;border-radius:4px;}
   .table-scroll::-webkit-scrollbar-track{background:transparent;}
-  table{border-collapse:collapse;table-layout:fixed;min-width:844px;margin:0 auto;}
-  colgroup col:nth-child(1){width:110px;}
-  colgroup col:nth-child(2){width:132px;}
+  table{border-collapse:collapse;table-layout:fixed;min-width:908px;margin:0 auto;}
+  colgroup col:nth-child(1){width:64px;}
+  colgroup col:nth-child(2){width:110px;}
   colgroup col:nth-child(3){width:192px;}
-  colgroup col:nth-child(4){width:108px;}
-  colgroup col:nth-child(5){width:166px;}
-  colgroup col:nth-child(6){width:136px;}
+  colgroup col:nth-child(4){width:132px;}
+  colgroup col:nth-child(5){width:108px;}
+  colgroup col:nth-child(6){width:166px;}
+  colgroup col:nth-child(7){width:136px;}
   thead th{
     position:sticky;top:0;background:var(--brand);color:#FFFFFF;font-size:13px;font-weight:600;
     text-align:left;padding:11px 14px;border-bottom:1px solid rgba(255,255,255,.16);white-space:nowrap;
@@ -136,6 +137,7 @@
   tbody tr:nth-child(even) td{background:#FAF9F4;}
   tbody tr:hover td{background:#F3F1E9;}
   td.name{font-weight:700;color:var(--ink);}
+  td.seq{color:#8A857C;font-variant-numeric:tabular-nums;white-space:nowrap;}
   td.code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;color:#3D5A57;font-variant-numeric:tabular-nums;white-space:nowrap;}
   td.path{color:#33302A;}
   mark{background:transparent;color:var(--accent);font-weight:700;border-bottom:2px solid var(--accent);}
@@ -245,15 +247,16 @@
     <div class="table-scroll">
       <table id="resultTable">
         <colgroup>
-          <col><col><col><col><col><col>
+          <col><col><col><col><col><col><col>
         </colgroup>
         <thead>
           <tr>
+            <th>村序号</th>
             <th>自然村名</th>
-            <th>行政村经办区划编码</th>
             <th>经办区划路径</th>
+            <th>行政村经办区划编码</th>
             <th>新-镇办名称</th>
-            <th>旧-镇办（中心）名字</th>
+            <th>旧-镇办（中心）名称</th>
             <th>行政村委会名</th>
           </tr>
         </thead>
@@ -363,9 +366,10 @@ function render(){
   tbody.innerHTML = rows.map(function(r){
     const terms = state.query.split(/\s+/).filter(Boolean);
     return '<tr>' +
+      '<td class="seq">' + esc(r.seq) + '</td>' +
       '<td class="name">' + mark(r.name, terms) + '</td>' +
-      '<td class="code">' + esc(r.code) + '</td>' +
       '<td class="path">' + esc(r.path) + '</td>' +
+      '<td class="code">' + esc(r.code) + '</td>' +
       '<td>' + esc(r.newTown) + '</td>' +
       '<td>' + esc(r.oldTown) + '</td>' +
       '<td>' + esc(r.village) + '</td>' +
